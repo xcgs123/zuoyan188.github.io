@@ -1,0 +1,106 @@
+ *{ margin: 0px;padding: 0px;}
+ /* 方式一 flow+margin */
+.parent{
+	min-width: 640px;
+	padding: 20px;
+	background-color: #eee;
+	border: 1px solid #999;
+}
+
+.left{
+	float:left;
+	margin-right: -100%;  
+	position: relative;
+	width: 160px;
+	padding: 20px;
+	background-color:white;
+	}
+.left img{
+	float: left;
+	margin-right: 20px;
+}
+
+.center{
+	float: left;
+	margin:0 140px 0 220px;
+	padding: 20px;
+	background-color:white;
+	}
+.center p{
+	text-indent: 2em; /*首行缩进*/
+}
+
+.right{
+	float: left;
+	margin-left: -120px;
+	width: 80px;
+	padding: 20px 20px 0px 20px;
+	background-color:white;
+}
+.right li{
+	list-style-type: none;
+	margin-bottom: 20px;
+}
+.right img{
+	width: 80px;
+	height: 80px;
+	display: block; /*去除li的3px间距*/
+}
+
+.floatfix:after{    /*清除浮动*/
+	content: "";
+	clear:both;
+	display: block;
+	height: 0;
+	overflow: hidden;
+}
+
+
+
+/* 方式二 position 
+/* .parent{
+	min-width: 640px;
+	height: 420px;
+	padding: 20px;
+	background-color: #eee;
+	border: 1px solid #999;
+	position: relative;
+}
+
+.left{
+	width: 160px;
+	padding: 20px;
+	background-color:white;
+	overflow: hidden;
+	}
+.left img{
+	float: left;
+	margin-right: 20px;
+}
+
+.center{
+	padding: 20px;
+	background-color:white;
+	position: absolute;
+	top:20px;
+	left: 240px;
+	right:160px;
+}
+
+.right{
+	width: 80px;
+	padding: 20px 20px 0px 20px;
+	background-color:white;
+	position: absolute;
+	top:20px;
+	right: 20px;
+}
+.right li{
+	list-style-type: none;
+	margin-bottom: 20px;
+}
+.right img{
+	width: 80px;
+	height: 80px;
+	display: block; 
+}*/
