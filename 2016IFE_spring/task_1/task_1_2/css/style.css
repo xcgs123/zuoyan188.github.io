@@ -1,0 +1,132 @@
+body{
+	font-family: "Microsoft Yahei";
+	margin: 0;
+}
+
+/*文档头部*/
+#header{
+	width:100%;
+	height: 60px;
+	background-color: #333333;
+	position: relative;
+}
+
+#header img{
+	width:200px;
+	height: 60px;
+	float: left;
+	/*position: absolute;
+	left: 20px;
+	top:50%;
+	transform:translateY(-50%); */
+}
+#header nav{
+	float: right;
+}
+#header li {
+    float: left;
+    width:80px;
+    list-style: none;
+}
+
+#header a{
+	font-size:12px;
+    color:white;
+    text-decoration: none;
+}
+
+#header a:hover{
+	color: rgb(153,156,161);
+}
+
+/*章节内容*/
+#section{
+	background-color: #ccc;
+	padding: 20px;
+}
+.article{
+	border: 1px solid #999;
+	box-shadow: 2px 2px 3px 0px #999;  
+	background-color: #fff;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+h3{
+	color: #777;
+	font-size: 1em;
+}
+span{
+    color: #999;
+    font-size: 0.8em;
+}
+.article p{
+	text-indent: 2em;
+	line-height: 1.5em;
+}
+
+.article-third figure{
+	display: inline-block;
+	padding: 20px;
+	border:1px solid #999;
+	float: left;
+	clear: both;
+}
+
+.article-third:after{  /* 清除浮动*/
+	content:"";
+	display: table;
+	clear: both;
+}
+
+.article-third figcaption{  /*图片标题居中*/
+	text-align: center;
+	margin-bottom: 20px;
+}
+.article-third img{
+	width: 120px;
+	height: 100px;
+}
+
+.article-fourth table{     /*设置表格*/
+	width: 100%;
+	border:1px solid #999;
+	border-collapse: collapse;
+}
+.article-fourth thead{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+}
+.article-fourth th,td{
+	border:1px solid #999;
+	padding: 5px;
+}
+.article-fourth tfoot{
+	background-color: #ccc;
+}
+
+/*侧边栏*/
+.article-five h2{
+	font-size: 1em;
+	padding: 10px;
+	border-left: 5px solid #ccc;
+}
+
+label.input-title{      /* 左右对齐*/
+    display: inline-block;
+    text-align: right;
+    width: 30%;
+    margin-right: 1em;
+    margin-top:0.7em;
+}
+.article-five p{
+	color: #999;
+	font-size: 0.7em;
+	text-indent: 0; /* 不缩进2em*/
+}
+
+.form-block {
+	display: inline-block;
+	vertical-align: text-top;
+}
