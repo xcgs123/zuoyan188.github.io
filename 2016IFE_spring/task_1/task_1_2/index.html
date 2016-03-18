@@ -95,7 +95,7 @@
                         <li>排名2</li>
                         <li>排名3</li>
                     </ol>
-                <p>下面是一个表格,给表格加了一个border="1"好让你看出是一个表格,你们不用写html时候不需</p>
+                下面是一个表格,给表格加了一个border="1"好让你看出是一个表格,你们不用写html时候不需加
                 <table>
                     <thead>
                     <tr>
@@ -136,30 +136,14 @@
             </article>
             <aside class="article article-five">
                 <h2>这里以后是一个侧栏，这是侧栏的标题</h2>
-                <form action="">
-                    <div>
-                        <label for="email" class="input-title">请输入邮箱地址</label>
-                        <div class="form-block">
-                            <input type="email" id="email" placeholder="这是一个文本输入框" />
-                            <p>邮箱地址请按要求格式输入</p></div>
-                    </div>
-                    <div>
-                        <label for="password" class="input-title">请输入密码</label>
-                        <input type="password" id="password" placeholder="这是一个文本输入框" />
-                    </div>
-                    <div>
-                        <label for="confirmpassword" class="input-title">请重复输入密码</label>
-                        <div class="form-block">
-                            <input type="password" id="confirmpassword" placeholder="这是一个文本输入框" />
-                            <p>密码请为6-16位英文数字</p></div>
-                    </div>
-                    <div>
-                        <label class="input-title">性别：</label>
-                        <input type="radio" id="man" value="男" name="sex" checked /><label for="man">男</label>
-                        <input type="radio" id="woman" value="女" name="sex" /><label for="woman">女</label>
-                    </div>
-                    <div>
-                        <label for="city" class="input-title">城市：</label>
+                <form action="" method="post" >
+                    <div><label for="email" class="input-title">请输入邮箱地址</label><input type="email" id="email" placeholder="这是一个文本输入框" /></div>
+                         <div class="input-tip">邮箱地址请按要求格式输入</div>
+                    <div><label for="password" class="input-title">请输入密码</label><input type="password" id="password" placeholder="这是一个文本输入框" /></div>
+                    <div><label for="confirmpassword" class="input-title">请重复输入密码</label><input type="password" id="confirmpassword" placeholder="这是一个文本输入框" /></div>
+                         <div class="input-tip">密码请为6-16位英文数字</div>
+                    <div><label class="input-title">性别</label><input type="radio" id="man" value="男" name="sex" checked /><label for="man">男</label><input type="radio" id="woman" value="女" name="sex" /><label for="woman">女</label></div>
+                    <div><label for="city" class="input-title">城市</label>
                         <select name="city" id="city">
                             <option value="北京" selected>北京</option>
                             <option value="上海">上海</option>
@@ -168,7 +152,7 @@
                         </select>
                     </div>
                     <div>
-                        <label class="input-title">爱好：</label>
+                        <label class="input-title">爱好</label>
                         <input type="checkbox" id="sport" /><label for="sport">运动</label>
                         <input type="checkbox" id="art" /><label for="art">艺术</label>
                         <input type="checkbox" id="science" /><label for="science">科学</label>
@@ -178,15 +162,15 @@
                         <textarea name="description" id="description" cols="100" rows="7" placeholder="这是一个多行输入框,输入您的个人描述"></textarea>
                     </div>
                     <div class="input-button">
-                        <input type="submit" value="确认提交" />
+                        <input  type="submit" value="确认提交" />
                     </div>
                 </form>
             </aside>
     </section>
     <footer id="footer">
-        <p>
+        <div>
             <abbr>版权所有&copy;</abbr>
-        </p>
+        </div>
     </footer>
 </body>
 </html>
