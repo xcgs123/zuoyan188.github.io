@@ -1,0 +1,49 @@
+.root {
+    display: flex;
+
+    margin: 100px auto;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    padding: 20px;
+    width: 1000px;
+    height: 300px;
+
+    justify-content: space-between;
+}
+.child_1 {
+    display: flex;
+
+    border: 1px solid red;
+    padding: 20px;
+    width: 450px;
+    height: 260px;
+
+    justify-content: space-between;
+}
+.child_2 {
+    display: flex;
+
+    border: 1px solid green;
+    padding: 20px;
+    width: 170px;
+    height: 220px;
+
+    justify-content: space-between;
+}
+.child_3 {
+    display: flex;
+
+    border: 1px solid blue;
+    padding: 20px;
+    width: 35px;
+    height: 180px;
+
+    justify-content: space-between;
+}
+input {
+    margin-left: 100px;
+    width: 50px;
+    height: 40px;
+
+    font-size: 40px;
+}
