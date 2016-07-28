@@ -42,7 +42,8 @@ function traverseRender(nodeList,foundText){
             }
             else{
                 nodeList[i++].className = "active";
-            }   
+            } 
+            lock = true;  
         }
         else{
             if(nodeList[i-1].className != "found"){

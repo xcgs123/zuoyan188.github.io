@@ -1,29 +1,15 @@
 var traverse = []; //存放遍历结果
 var search = []; //存放搜索结果
 var timer;
+var lock=false;
 
-//深度优先遍历
-function preOrder(tree) {
+//遍历树
+function preOrder(tree,nodeList) {
     if (tree !== null) {
-        traverse.push(tree);
+        nodeList.push(tree);
         for (var i = 0; i < tree.children.length; i++) {
-            preOrder(tree.children[i]);
+            preOrder(tree.children[i],nodeList);
         }
-    }
-}
-//搜索树
-var tag = true; //标记是否搜索到，搜索到为false
-function searchTree(tree, content) {
-    var equal = (tree.innerHTML.split('<')[0].replace(/(^\s+)|(\s+$)/g, "") === content);
-    if (!equal && tag) {//未搜索到
-        search.push(tree);
-        for (var i = 0; i < tree.children.length; i++) {
-            searchTree(tree.children[i], content);
-        }
-    } else if (equal) {
-        search.push(tree);
-        tag = false;
-        return;
     }
 }
 
@@ -31,112 +17,103 @@ window.onload = function() {
     var domTree = document.getElementById('top-level');
 
     document.getElementById('preorder').onclick = function() {
-        clearResult();
-        preOrder(domTree);
-        animate(traverse, 2);
+    	var Nodelist=[];
+    	if(lock === true){
+            alert("正在遍历中!");
+        }else{
+        	clearResult();
+			preOrder(domTree,Nodelist);
+            setTimeout(animate(Nodelist),500);
+        } 
     };
 
     document.getElementById('search-btn').onclick = function() {
         var content = document.getElementById('search-txt').value;
+        var Nodelist=[];
         if (content === '') {
             alert('请填写要搜索的内容');
         } else {
-            clearResult();
-            searchTree(domTree, content);
-            if (!tag) { //查询成功
-                animate(search, 1);
-            } else { //无该搜索结果
-                animate(search, 3);
-            }
-
+        	if(lock === true){
+	            alert("正在遍历中!");
+	        }else{
+	        	clearResult();
+				preOrder(domTree,Nodelist);
+	            setTimeout(animate(Nodelist,content),500);
+	        } 
         }
     };
 
     //点击相应的box背景变色
-    var selectDiv; //记录选中的box
+    var selectDiv;//记录选中的box
     var levels = document.getElementById('box-container').getElementsByTagName('div');
     for (var i = 0; i < levels.length; i++) {
         levels[i].onclick = function(e) {
             clearResult();
-            this.style.backgroundColor = '#fef9d1';
-            e.stopPropagation(); //阻止事件冒泡
+            this.className = 'active';
+            e.stopPropagation();//阻止事件冒泡
             selectDiv = this;
         };
     }
 
     //删除选中box及其子节点
-    document.getElementById('delete-btn').onclick = function() {
-        if (selectDiv === undefined) {
+    document.getElementById('delete-btn').onclick  = function(){
+        if(selectDiv === undefined){
             alert('请先选中要删除的节点');
-        } else {
+        }else{
             var parent = selectDiv.parentNode;
             parent.removeChild(selectDiv);
         }
     };
 
     //在选中节点下增加子节点
-    document.getElementById('insert-btn').onclick = function() {
+    document.getElementById('insert-btn').onclick = function(){
         var content = document.getElementById('insert-txt').value;
 
-        if (content === '') {
+        if(content === ''){
             alert('请填写新增节点的内容');
-        } else if (selectDiv === undefined) {
+        }else if(selectDiv === undefined){
             alert('请先选中要操作的节点');
-        } else {
+        }else{
 
             var newDiv = document.createElement('div');
             newDiv.innerHTML = content;
-            newDiv.className = 'level-';
             selectDiv.appendChild(newDiv);
-
-            //更新点击事件
-            levels = document.getElementById('box-container').getElementsByTagName('div');
-            for (var i = 0; i < levels.length; i++) {
-                levels[i].onclick = function(e) {
-                    clearResult();
-                    this.style.backgroundColor = '#fef9d1';
-                    e.stopPropagation(); //阻止事件冒泡
-                    selectDiv = this;
-                };
+            window.onload ();
             }
         }
-    }
+    
+}
+
+//将遍历或搜索结果用动画展示
+function animate(nodeList,foundText) {
+    var i = 0;
+    var len=nodeList.length;
+    timer=setInterval(function(){
+    	if(i<len){
+    		lock=true;
+    		if(i>0&& nodeList[i-1].className != "found"){
+               nodeList[i-1].className = ""; 
+            }if(nodeList[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g, "") == foundText){
+                nodeList[i].className = "found";
+                i++;
+            }else{
+            	nodeList[i++].className="active";
+            }
+    	}else{
+            if(nodeList[i-1].className != "found"){
+                nodeList[i-1].className = "";
+            }
+            lock = false;
+            clearInterval(timer);
+        }
+    },500);
+
 }
 
 //清理前一个遍历或搜索
 function clearResult() {
     var allDiv = document.getElementsByTagName('div');
-
     for (var i = 0; i < allDiv.length; i++) {
-        allDiv[i].style.backgroundColor = '#fff';
+        allDiv[i].className = "default";
     }
-    clearInterval(timer);
-    traverse = [];
-    search = [];
-    tag = true;
-}
-
-//将遍历或搜索结果用动画展示
-//searchOrTraverse:1-search,2-traverse,3-search no result
-function animate(result, searchOrTraverse) {
-    var i = 0;
-    // result[i].style.backgroundColor = '#fec8b0';
-    timer = setInterval(function() {
-        i++;
-        if (i < result.length) {
-            result[i - 1].style.backgroundColor = '#fff';
-            result[i].style.backgroundColor = '#fec8b0';
-        } else if (searchOrTraverse === 1) {  /*查询成功*/
-            clearInterval(timer);
-            result[result.length - 1].style.backgroundColor = '#593c7f';
-        } else if (searchOrTraverse === 2) {
-            clearInterval(timer);
-            result[result.length - 1].style.backgroundColor = '#fff';
-        } else if (searchOrTraverse === 3) {
-            clearInterval(timer);
-            result[result.length - 1].style.backgroundColor = '#fff';
-            alert('没查询到该搜索内容');
-        }
-    }, 500);
-
 }
