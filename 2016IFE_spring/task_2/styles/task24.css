@@ -33,11 +33,11 @@
   }
   
   .active {
-      background-color: blue;
+      background-color:#fec8b0;
       color: #fff;
   }
   
   .found {
-      background-color: red;
+      background-color: #593c7f;
       color: #fff;
   }

@@ -45,7 +45,7 @@ window.onload = function() {
 
 	//点击相应的box背景变色
 	var selectDiv; //记录选中的box
-	var levels = document.getElementById('box-container').getElementsByTagName('div');
+	var levels = document.getElementById('top-level').getElementsByTagName('div');
 	for (var i = 0; i < levels.length; i++) {
 		levels[i].onclick = function(e) {
 			clearResult();
