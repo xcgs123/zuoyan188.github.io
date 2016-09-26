@@ -21,16 +21,16 @@ span{
 
 /* 以下是结点部分的样式 */
 .nodebody-visible {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: nowrap;
+    // justify-content: flex-start;
     margin: 5px 18px;
-    background-color: #ffffff;
-    user-select:none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    // background-color: #ffffff;
+    // user-select:none;
+    // -webkit-user-select: none;
+    // -moz-user-select: none;
+    // -ms-user-select: none;
 }
 .nodebody-hidden {
     display: none;
