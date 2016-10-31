@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>vip的统一loading</title>
+    </head>
+    <body>
+        <div id="loading">
+            <canvas class='vip-cvs' width='50' height='50' id="canvas"></canvas>
+        </div>
+        <script type="text/javascript">
+            window.onload =function initLoadingAnimate() {
+            var step = 0,
+                canvas = document.getElementById('canvas'),
+                centerX = canvas.width/2,   //Canvas中心点x轴坐标
+                centerY = canvas.height/2;  //Canvas中心点y轴坐标
+                ctx = canvas.getContext('2d'),
+                circ = Math.PI * 2,
+                quart = Math.PI / 2;
+                
+
+            ctx.clearRect(0, 0, 30, 30);
+            ctx.beginPath();
+            ctx.lineCap = 'square';
+            ctx.closePath();
+            ctx.fill();
+
+            //画白色外圈
+            function whiteCircle(){
+                ctx.save();
+                ctx.beginPath();
+                ctx.strokeStyle = "#fff";
+                ctx.lineWidth = 2; //设置线宽
+                ctx.arc(centerX, centerY, 23 , 0, circ, false);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+            };
+
+            //vip文字绘制
+            function text(){
+                ctx.save();
+                ctx.strokeStyle = "#ccc"; //设置描边样式
+                ctx.font = "18px simsun"; //设置字体大小和字体
+                //绘制字体，并且指定位置
+                ctx.strokeText("vip", 13, 30);
+                ctx.stroke(); //执行绘制
+                ctx.restore();
+             }
+
+             //画外圈
+            function draw(current) {
+                ctx.save();
+                ctx.strokeStyle = "#e5007f"; //设置描边样式
+                ctx.lineWidth = 2; //设置线宽
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 23, -(quart), ((circ) * current) - quart, false);
+                ctx.stroke();
+                ctx.closePath(); //路径结束
+                ctx.restore();//返回之前保存过的路径状态和属性
+            };
+
+             //动画循环
+            (function drawFrame(){
+                window.requestAnimationFrame(drawFrame, canvas);//requestAnimationFrame作用与setTimeInterval一样，不同的是它会根据浏览器的刷新频率自动调整动画的时间间隔。
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                whiteCircle();
+                text();
+                draw(step);
+
+                if(step > 0.99){
+                    step = 0;
+                }else{ 
+                    step += 0.01;
+                }
+            }());
+        }
+        </script>
+    </body>
+</html>
