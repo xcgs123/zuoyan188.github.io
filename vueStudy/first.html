@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>从零开始学Vue</title>
+</head>
+<body>
+
+    <div id="vueInstance">
+        输入你的姓名：<input type="text" v-model="name">
+        <p>{{ $data | json }}</p>
+        <p>{{ name }}</p>
+    </div>
+
+    <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+    <script>
+          // 创建一个新的Vue实例，并设置挂载点
+          var V = new Vue({
+                el : '#vueInstance',
+                data : {
+                    name : '_Appian'
+                }
+          });
+    </script>
+</body>
+</html>

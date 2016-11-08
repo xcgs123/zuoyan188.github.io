@@ -18,6 +18,7 @@
         </fieldset>
     </form>
 
+    <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript">
         var
             form = $('#test-form'),
@@ -37,55 +38,21 @@
             alert(form.serialize());
         });
 
-        form.click(
-           function()
-           {
-               for(var i=0;i<langs.length;i++) 
-               if(!$(langs[i]).is(':checked'))  break;
-               if(i<langs.length&&selectAllLabel.is(':hidden'))
-               {
-                   selectAll.prop('checked',false);
-                   selectAllLabel.show();
-                   deselectAllLabel.hide();
-               }
-               if(i===langs.length&&!selectAllLabel.is(':hidden'))
-               {
-                    selectAll.prop('checked',true);
-                    selectAllLabel.hide();
-                    deselectAllLabel.show();
-               }
-               if(selectAll.is(':checked'))
-               {
-                   if(deselectAllLabel.is(':hidden'))
-                   {
-                        deselectAllLabel.show();
-                        selectAllLabel.hide();
-                        langs.prop('checked',true);
-                   }
-               }
-               else
-               {
-                   if(selectAllLabel.is(':hidden'))
-                   {
-                        deselectAllLabel.hide();
-                        selectAllLabel.show();
-                        langs.prop('checked',false);
-                   }
-               }
-           }
-        );
-        invertSelect.click(
-           function()
-           {
-               for(var i=0;i<langs.length;i++) 
-               {
-                    if($(langs[i]).is(':checked'))
-                    !$(langs[i]).prop('checked',false);
-                    else !$(langs[i]).prop('checked',true);
-               }
+        $(selectAll).click(function(){
+            $(langs).prop("checked",$(selectAll).prop("checked"));
+        });
 
-           }
-        );
+        $(langs).click(function(){
+            $(selectAll).prop("checked",$(langs).length == form.find('[name=lang]:checked').length);
+        });
+
+        $(invertSelect).click(function(){
+            $(langs).each(function(){
+                $(this).prop("checked",!$(this).prop("checked"));
+            });
+
+            $(selectAll).prop("checked",$(langs).length == form.find('[name=lang]:checked').length);
+        });
     </script>
 </body>
 </html>

@@ -16,7 +16,8 @@
                 centerY = canvas.height/2;  //Canvas中心点y轴坐标
                 ctx = canvas.getContext('2d'),
                 circ = Math.PI * 2,
-                quart = Math.PI / 2;
+                quart = Math.PI / 2,
+                backforward = true;
                 
 
             ctx.clearRect(0, 0, 30, 30);
@@ -54,7 +55,7 @@
                 ctx.strokeStyle = "#e5007f"; //设置描边样式
                 ctx.lineWidth = 2; //设置线宽
                 ctx.beginPath();
-                ctx.arc(centerX, centerY, 23, -(quart), ((circ) * current) - quart, false);
+                ctx.arc(centerX, centerY, 23, -(quart), ((circ) * current) - quart, backforward);
                 ctx.stroke();
                 ctx.closePath(); //路径结束
                 ctx.restore();//返回之前保存过的路径状态和属性
@@ -69,10 +70,14 @@
                 text();
                 draw(step);
 
+                step += 0.01;
                 if(step > 0.99){
                     step = 0;
-                }else{ 
-                    step += 0.01;
+                    if (!backforward) {
+                        backforward = true;
+                    } else {
+                        backforward = false;
+                    }
                 }
             }());
         }

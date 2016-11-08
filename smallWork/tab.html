@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>TAB</title>	
+	<script type="text/javascript" src="http://www.xipwang.cn/js/jquery.min.js"></script>
+	<style type="text/css">
+		.main{
+			
+		}
+		 *{ margin:0; padding: 0 }
+		 ul{ list-style-type: none; }
+		 .ui-tab{
+		 	overflow: hidden;
+		 	width: 100%;
+
+		 }
+		.ui-tab .tab-nav{ 
+			width: 100%;
+			display:-webkit-box;
+			display:-webkit-flex;
+			display:-ms-flexbox;
+			display:flex;
+			-webkit-box-pack:justify;
+			-webkit-justify-content:space-between;
+			-ms-flex-pack:justify;
+			justify-content:space-between;
+		 }
+		 .ui-tab .tab-nav li{
+			-webkit-box-flex:1;
+			-webkit-flex:1;
+			-ms-flex:1;
+			flex:1;
+			text-align: center;
+			padding: 10px;
+			position: relative;
+
+		 }
+		 .ui-tab .tab-nav li.current:before{
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			left: 0;
+			bottom: 0;
+			border-bottom:2px solid #f00;
+		 }
+		 .tab-content{  
+		   display: -webkit-box;
+		  -webkit-transition: all 0.4s ease-out;
+
+		}
+		 .tab-content li{		 	
+		 	height: 300px;
+		 	background: #ff2
+		 }
+	</style>
+</head>
+<body>
+
+<div class="main">
+	<div class="ui-tab">		
+		<ul class="tab-nav">
+			<li class="current">菜单一</li>
+			<li>菜单二</li>
+			<li>菜单三</li>
+		</ul>
+		<ul class="tab-content">
+			<li class="current">
+				1内容选项1内容选项1内容
+			</li>
+			<li>选项2内容</li>
+			<li>选项3内容</li>
+		</ul>
+	</div>
+	</div>	
+	<script type="text/javascript">
+		
+  $(function(){
+  	;(function($){
+  		$.fn.tabSwiper= function(option){
+  			function  tabSwiper(option,element){
+  				     this.element = element;  				  
+  					 this.ulArr = this.element.children(); 
+  					 this.width = this.ulArr.width() ;	
+  					 this.pagetab = 0;
+  					 this.swiperone=true	
+  					 this.option =$.extend({isWiper:true,isAuto:true,},option);  				
+  					 this.init();
+  			};
+	  		tabSwiper.prototype ={	  			
+	  			init:function(option){
+	  			    var	 m  = this  
+  					m.setWidth(m.ulArr);
+  					m.clickSwitch(m.ulArr,m);
+  					m.swiperEvent(m);  				
+	  			},
+
+	  			setWidth:function(u){	  			
+	  				var content = u.eq(1);
+	  				var cont = content.children().length;
+	  				content.children().css("width",this.width+"px");	  			
+	  				content.css("width",cont* this.width+"px");
+	  			  return cont;
+	  			},
+	  			clickSwitch:function(u,m){
+	  				 u.eq(0).children().on('click',function(){
+  				 		 var  $this = $(this)
+  				 		  m.pagetab = $(this).index(); 	
+  				 		  m.movetab(m,m.pagetab);
+	  				 })
+	  			},
+	  		    _swipeRight:function (m,callback){		  			
+		 			 var  _x1=0;
+		 			 var right;		 			
+			  			$(m).on("touchstart",function(e){
+			  				var  e = e  || event;	  			
+			  				var _touch = e.originalEvent.targetTouches[0]; 
+							 _x1= _touch.pageX; 	  			
+			  			}).on("touchmove",function(e){
+			  				var  e = e  || event;
+			  				var _touch = e.originalEvent.targetTouches[0]; 	  				
+			  				if(_touch.pageX -_x1 > 0 ){
+			  					var  swiper = Math.abs(_touch.pageX -_x1)
+			  					right ="right";
+			  				}
+			  			}).on('touchend',function(){  
+			  				if(right =="right"){
+		  						callback();
+		  						right='undefined';
+			  				 }
+			  		 })	
+	  			 },
+	  			_swipeLeft:function (m,callback){	  			
+		 			 var  _x1=0
+		 			 var left;	
+
+		  			   $(m).on("touchstart",function(e){
+		  				var  e = e  || event;			  				 				
+		  				var _touch = e.originalEvent.targetTouches[0]; 
+						 _x1= _touch.pageX; 	  			
+		  			   }).on("touchmove",function(e){
+		  				var  e = e  || event
+		  				var _touch = e.originalEvent.targetTouches[0]; 	  				
+		  				if(_touch.pageX -_x1 < 0 ){
+		  					var  swiper = Math.abs(_touch.pageX -_x1);	  					
+		  					left ="left";
+		  				}
+		  			   }).on('touchend',function(){
+			  				if(left =="left"){
+		  						callback();
+		  						left ='undefined';
+			  			   }
+		  			  })			
+  				},
+  				swiperEvent:function(m){   					
+	  				if(m.option.isWiper) {	  					  								 
+		  					 m._swipeRight(m.ulArr.eq(1),function(){    						
+		  					     m.pagetab--; 	  					    			    					
+		  					     m.movetab(m,m.pagetab);  							
+		  					});
+		  					 m._swipeLeft(m.ulArr.eq(1),function(){   
+		  					     m.pagetab++;  
+		  					     m.movetab(m,m.pagetab);
+		  					})
+	  					}
+  				},  				
+  				movetab:function(m,index){	
+			 	  	 if(index< 0){
+			 	  	 		index = m.pagetab = 0;			 	  	 			
+			 	  	  };
+			 	  	  if(index >= m.setWidth(m.ulArr)){ 
+			 	  	 		index= m.pagetab =m.setWidth(m.ulArr)-1;
+			 	  	 };			 	
+		 	  	   m.ulArr.eq(1).css("-webkit-transform","translateX(-"+index* m.width+"px)"); 			 	  
+		 	       m.ulArr.eq(0).children().eq(index).addClass("current").siblings().removeClass("current");		 	      			 	 
+			 	 },
+	  		};
+	  		this.each(function(){	  					
+	  			new tabSwiper(option,$(this))
+	  		})
+  		};
+  	})(jQuery)
+  	$('.ui-tab').tabSwiper({
+			isWiper:true,//是否滑动
+				
+  		});
+  });
+
+  
+
+
+	</script>
+</body>
+</html>

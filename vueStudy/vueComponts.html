@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>揭开Vue组件的神秘面纱</title>
+</head>
+<body>
+
+    <div id="vueInstance">
+        <mine></mine>
+        <mine></mine>
+        <mine></mine>
+    </div>
+    
+    <template id="mineTpl">
+        <p>My name is Appian.</p>
+        <button>点击没有任何事件</button>
+    </template>
+    
+    <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+    <script>
+        Vue.component('mine',{
+            template :  '#mineTpl'
+        });
+
+        var V = new Vue({
+            el : '#vueInstance',
+        });
+
+    </script>
+</body>
+</html>

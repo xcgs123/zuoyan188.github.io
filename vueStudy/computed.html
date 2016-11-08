@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>从零开始学Vue</title>
+</head>
+<body>
+
+    <div id="vueInstance">
+        输入1~10内的数字: <input type="text" v-model="value">
+        <p>计算结果：{{ resultMsg }}</p>
+    </div>
+
+    <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+    <script>
+          // 创建一个新的Vue实例，并设置挂载点
+          var V = new Vue({
+                el : '#vueInstance',
+                data : {
+                    value : null,
+                    randNum : 5
+                },
+                methods : {
+                    getRandNum: function(min, max){
+                      return Math.floor(Math.random() * (max - min + 1)) + min;
+                    }
+                },
+                computed : {
+                    resultMsg : function(){
+                        if(this.value == this.randNum){
+                            this.randNum = this.getRandNum(1, 10);
+                            return '你猜对了!';
+                        }else{
+                            this.randNum = this.getRandNum(1, 10);
+                            return '猜错了，再来!';
+                        }
+                    }
+                }
+          });
+    </script>
+</body>
+</html>

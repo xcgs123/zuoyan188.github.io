@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>利用v-on进行事件绑定</title>
+</head>
+<body>
+
+    <div id="vueInstance">
+        <section v-if="loginStatus">
+            输入你的姓名：<input type="text" v-model="name">
+            <button v-on:mouseover="say">欢迎点击</button>
+            <button @click="switchLoginStatus">退出登录</button>
+        </section>
+        
+        <section v-if="!loginStatus">
+            登录用户：<input type="text">
+            登录密码：<input type="password">
+            <button @click="switchLoginStatus">登录</button>
+        </section>
+    </div>
+
+    <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.js"></script>
+    <script>
+          // 创建一个新的Vue实例，并设置挂载点
+          var V = new Vue({
+                el : '#vueInstance',
+                data : {
+                    name : '_Appian',
+                    loginStatus : false
+                },
+                methods:{
+                    say: function(){
+                        alert('欢迎' + this.name);
+                    },
+                    switchLoginStatus : function(){
+                        this.loginStatus = !this.loginStatus;
+                    }
+                }
+          });
+    </script>
+</body>
+</html>
