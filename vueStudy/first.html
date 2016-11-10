@@ -7,6 +7,7 @@
 <body>
 
     <div id="vueInstance">
+        <!-- 可以用v-model对input输入框进行绑定，从而我们可以使用动态的获取数据对象的值 -->
         输入你的姓名：<input type="text" v-model="name">
         <p>{{ $data | json }}</p>
         <p>{{ name }}</p>
